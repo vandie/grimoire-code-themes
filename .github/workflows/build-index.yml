@@ -3,12 +3,15 @@ name: Build Index
 on:
   push:
     branches:
-      - coding-themes
+      - main
     paths:
       - "**/*.json"
       - "build-index.js"
       - "package.json"
       - ".github/workflows/build-index.yml"
+  pull_request:
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
@@ -28,6 +31,10 @@ jobs:
 
       - name: Regenerate index
         run: node build-index.js
+
+      - name: Verify index is current (PRs)
+        if: github.event_name == 'pull_request'
+        run: node build-index.js --check
 
       - name: Commit and push changes
         if: github.event_name == 'push'
