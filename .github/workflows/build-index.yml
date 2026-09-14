@@ -6,12 +6,19 @@ on:
       - main
     paths:
       - "**/*.json"
+      - "!scripts/**"
       - "build-index.js"
       - "package.json"
       - ".github/workflows/build-index.yml"
   pull_request:
     branches:
       - main
+    paths:
+      - "**/*.json"
+      - "!scripts/**"
+      - "build-index.js"
+      - "package.json"
+      - ".github/workflows/build-index.yml"
   workflow_dispatch:
 
 jobs:

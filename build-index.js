@@ -19,8 +19,11 @@ function discoverThemes() {
   const themes = [];
   const errors = [];
 
+  const IGNORED_DIRS = new Set(['node_modules', 'schema', 'scripts']);
+
   for (const entry of entries) {
-    if (!entry.isDirectory() || entry.name.startsWith('.') || entry.name === 'node_modules' || entry.name === 'schema') continue;
+    // Skip hidden directories, non-directories, and tooling folders to prevent script/schema files from being indexed as themes
+    if (!entry.isDirectory() || entry.name.startsWith('.') || IGNORED_DIRS.has(entry.name)) continue;
 
     const themeDir = entry.name;
     const manifestPath = path.join(ROOT, themeDir, `${themeDir}.json`);
