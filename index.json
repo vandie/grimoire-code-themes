@@ -1,8 +1,23 @@
 {
   "$schema": "https://raw.githubusercontent.com/grimoire-codex/community-add-ons/main/schema/theme-index.schema.json",
   "version": 1,
-  "generated": "2026-09-14T23:06:33Z",
+  "generated": "2026-09-14T23:07:25Z",
   "themes": [
+    {
+      "id": "aura",
+      "name": "Aura",
+      "version": "2.1.2",
+      "mode": "dark",
+      "modes": [
+        "dark"
+      ],
+      "path": "aura/aura.json",
+      "sha256": "082fb1773086d90ade494b96c79c261df9f09abd5e1922a62ae43516e1ba0b94",
+      "app_mode": "grimoire",
+      "author": "DaltonMenezes",
+      "description": "Theme auto-converted from Aura.",
+      "homepage": "https://vscodethemes.com/e/DaltonMenezes.aura-theme/aura-dark"
+    },
     {
       "id": "dracula",
       "name": "Dracula",

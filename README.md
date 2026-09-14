@@ -11,6 +11,7 @@ A user installs the ones they want from **Settings → Appearance** and picks on
 
 | Theme | Modes | Author | Description |
 | --- | --- | --- | --- |
+| [Aura](aura/) | dark | [@DaltonMenezes](https://github.com/DaltonMenezes) | Theme auto-converted from Aura. |
 | [Dracula](dracula/) | dark | [@zenorocha](https://github.com/zenorocha) | A dark theme for code editors and terminal emulators created by Zeno Rocha featuring a distinct purple and pastel accent color palette. |
 | [Dracula At Night](dracula-at-night/) | dark | [@bceskavich](https://github.com/bceskavich) | Theme auto-converted from Dracula At Night. |
 | [Gruvbox](gruvbox/) | light & dark | [@morhetz](https://github.com/morhetz) | Retro groove color scheme for Vim & modern code editors with warm earth tones, offering both dark and light variants. |
