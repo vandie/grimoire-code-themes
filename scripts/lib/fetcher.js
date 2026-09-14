@@ -13,46 +13,50 @@ function slugify(text) {
 }
 
 /**
- * Performs HTTP/HTTPS GET requests following redirects.
+ * Performs HTTP/HTTPS GET requests following redirects with socket timeout.
  */
 export function fetchUrl(url) {
   return new Promise((resolve, reject) => {
     const client = url.startsWith('https') ? https : http;
-    client
-      .get(url, { headers: { 'User-Agent': 'Grimoire-Theme-Converter/1.0' } }, (res) => {
-        if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
-          return resolve(fetchUrl(res.headers.location));
-        }
-        if (res.statusCode !== 200) {
-          return reject(new Error(`HTTP ${res.statusCode} from ${url}`));
-        }
-        let body = '';
-        res.on('data', (chunk) => (body += chunk));
-        res.on('end', () => resolve(body));
-      })
-      .on('error', reject);
+    const req = client.get(url, { headers: { 'User-Agent': 'Grimoire-Theme-Converter/1.0' } }, (res) => {
+      if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
+        return resolve(fetchUrl(res.headers.location));
+      }
+      if (res.statusCode !== 200) {
+        return reject(new Error(`HTTP ${res.statusCode} from ${url}`));
+      }
+      let body = '';
+      res.on('data', (chunk) => (body += chunk));
+      res.on('end', () => resolve(body));
+    });
+    req.setTimeout(15000, () => {
+      req.destroy(new Error(`Request timeout fetching ${url}`));
+    });
+    req.on('error', reject);
   });
 }
 
 /**
- * Downloads binary buffer data over HTTP/HTTPS.
+ * Downloads binary buffer data over HTTP/HTTPS with socket timeout.
  */
 export function fetchUrlBuffer(url) {
   return new Promise((resolve, reject) => {
     const client = url.startsWith('https') ? https : http;
-    client
-      .get(url, { headers: { 'User-Agent': 'Grimoire-Theme-Converter/1.0' } }, (res) => {
-        if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
-          return resolve(fetchUrlBuffer(res.headers.location));
-        }
-        if (res.statusCode !== 200) {
-          return reject(new Error(`HTTP ${res.statusCode} from ${url}`));
-        }
-        const chunks = [];
-        res.on('data', (chunk) => chunks.push(chunk));
-        res.on('end', () => resolve(Buffer.concat(chunks)));
-      })
-      .on('error', reject);
+    const req = client.get(url, { headers: { 'User-Agent': 'Grimoire-Theme-Converter/1.0' } }, (res) => {
+      if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
+        return resolve(fetchUrlBuffer(res.headers.location));
+      }
+      if (res.statusCode !== 200) {
+        return reject(new Error(`HTTP ${res.statusCode} from ${url}`));
+      }
+      const chunks = [];
+      res.on('data', (chunk) => chunks.push(chunk));
+      res.on('end', () => resolve(Buffer.concat(chunks)));
+    });
+    req.setTimeout(15000, () => {
+      req.destroy(new Error(`Request timeout fetching ${url}`));
+    });
+    req.on('error', reject);
   });
 }
 
@@ -100,8 +104,8 @@ export async function handleVscodethemesUrl(urlStr, rootDir) {
   const vsixBuffer = await fetchUrlBuffer(vsixUrl);
   fs.writeFileSync(tmpVsixPath, vsixBuffer);
 
-  // Unpack VSIX zip package to inspect internal extension manifests
-  execSync(`unzip -q "${tmpVsixPath}" -d "${tmpExtractDir}"`);
+  // Unpack VSIX zip package using non-interactive flags (-o -q) to prevent CI hangs
+  execSync(`unzip -o -q "${tmpVsixPath}" -d "${tmpExtractDir}"`);
 
   const pkgJsonPath = path.join(tmpExtractDir, 'extension', 'package.json');
   if (!fs.existsSync(pkgJsonPath)) {

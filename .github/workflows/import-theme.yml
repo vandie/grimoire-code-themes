@@ -36,12 +36,17 @@ jobs:
           node-version: "22"
 
       - name: Convert Theme
+        env:
+          INPUT_URL: ${{ inputs.url }}
+          INPUT_ID: ${{ inputs.id }}
+          INPUT_NAME: ${{ inputs.name }}
+          INPUT_AUTHOR: ${{ inputs.author }}
         run: |
-          CMD="node scripts/convert-vscode-theme.js --url \"${{ inputs.url }}\""
-          if [ -n "${{ inputs.id }}" ]; then CMD="$CMD --id \"${{ inputs.id }}\""; fi
-          if [ -n "${{ inputs.name }}" ]; then CMD="$CMD --name \"${{ inputs.name }}\""; fi
-          if [ -n "${{ inputs.author }}" ]; then CMD="$CMD --author \"${{ inputs.author }}\""; fi
-          eval $CMD
+          ARGS=("--url" "$INPUT_URL")
+          if [ -n "$INPUT_ID" ]; then ARGS+=("--id" "$INPUT_ID"); fi
+          if [ -n "$INPUT_NAME" ]; then ARGS+=("--name" "$INPUT_NAME"); fi
+          if [ -n "$INPUT_AUTHOR" ]; then ARGS+=("--author" "$INPUT_AUTHOR"); fi
+          node scripts/convert-vscode-theme.js "${ARGS[@]}"
 
       - name: Commit and push changes
         run: |
