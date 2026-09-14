@@ -1,0 +1,66 @@
+{
+  "version": 1,
+  "generated": "2026-09-14T21:49:00Z",
+  "themes": [
+    {
+      "id": "dracula",
+      "name": "Dracula",
+      "version": "1.0.0",
+      "mode": "dark",
+      "modes": [
+        "dark"
+      ],
+      "path": "dracula/dracula.json",
+      "sha256": "eb2011f4cadd1736c66e1314bd1f1f711adb182d43bf7b2cbcac33527d610a9b",
+      "app_mode": "grimoire",
+      "author": "zenorocha",
+      "description": "A dark theme for code editors and terminal emulators created by Zeno Rocha featuring a distinct purple and pastel accent color palette.",
+      "homepage": "https://draculatheme.com"
+    },
+    {
+      "id": "panda",
+      "name": "Panda",
+      "version": "1.0.0",
+      "mode": "dark",
+      "modes": [
+        "dark"
+      ],
+      "path": "panda/panda.json",
+      "sha256": "084bc4a607d994db424be061561025fdc39b8594a59dfde8e7a93633a28a833c",
+      "app_mode": "grimoire",
+      "author": "vandie",
+      "description": "A dark theme based on the Panda Syntax coding theme."
+    },
+    {
+      "id": "solarized",
+      "name": "Solarized",
+      "version": "1.0.0",
+      "mode": "dark",
+      "modes": [
+        "light",
+        "dark"
+      ],
+      "path": "solarized/solarized.json",
+      "sha256": "f2976030bd982234de3515b5337996f3a662c7c811b4f5d8946e8570ab63dbe3",
+      "app_mode": "grimoire",
+      "author": "altercation",
+      "description": "Precision 16-color palette designed for use with terminal and GUI applications, offering both dark and light modes.",
+      "homepage": "https://ethanschoonover.com/solarized"
+    },
+    {
+      "id": "tokyo-night",
+      "name": "Tokyo Night",
+      "version": "1.0.0",
+      "mode": "dark",
+      "modes": [
+        "dark"
+      ],
+      "path": "tokyo-night/tokyo-night.json",
+      "sha256": "811af8e5d1d9bc0368b33b0d54fe8fba3621f6d3674dcdea1a98a64479534445",
+      "app_mode": "grimoire",
+      "author": "folke",
+      "description": "A clean, dark Neovim & VS Code theme inspired by the lights of Tokyo at night.",
+      "homepage": "https://github.com/folke/tokyonight.nvim"
+    }
+  ]
+}
