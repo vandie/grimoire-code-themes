@@ -1,7 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/grimoire-codex/community-add-ons/main/schema/theme-index.schema.json",
   "version": 1,
-  "generated": "2026-09-14T23:10:12Z",
+  "generated": "2026-09-14T23:10:26Z",
   "themes": [
     {
       "id": "aura",
