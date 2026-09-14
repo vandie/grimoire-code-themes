@@ -1,7 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/grimoire-codex/community-add-ons/main/schema/theme-index.schema.json",
   "version": 1,
-  "generated": "2026-09-14T22:14:15Z",
+  "generated": "2026-09-14T22:49:02Z",
   "themes": [
     {
       "id": "dracula",
@@ -17,6 +17,21 @@
       "author": "zenorocha",
       "description": "A dark theme for code editors and terminal emulators created by Zeno Rocha featuring a distinct purple and pastel accent color palette.",
       "homepage": "https://draculatheme.com"
+    },
+    {
+      "id": "dracula-at-night",
+      "name": "Dracula At Night",
+      "version": "1.0.0",
+      "mode": "dark",
+      "modes": [
+        "dark"
+      ],
+      "path": "dracula-at-night/dracula-at-night.json",
+      "sha256": "080b1e53f02bbfb71eaf96f7cfcbe69ae5ee10f987b989899a0d919d71867989",
+      "app_mode": "grimoire",
+      "author": "bceskavich",
+      "description": "A darker, deep midnight variation of the classic Dracula theme designed for low-light coding.",
+      "homepage": "https://github.com/bceskavich/dracula-at-night"
     },
     {
       "id": "gruvbox",
