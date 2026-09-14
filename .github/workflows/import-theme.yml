@@ -1,0 +1,57 @@
+name: Import VS Code Theme
+
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: 'URL to VS Code theme JSON or raw GitHub file'
+        required: true
+        type: string
+      id:
+        description: 'Custom theme ID (optional slug, e.g. "my-theme")'
+        required: false
+        type: string
+      name:
+        description: 'Custom theme display name (optional)'
+        required: false
+        type: string
+      author:
+        description: 'GitHub username of theme author (optional)'
+        required: false
+        type: string
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Convert Theme
+        run: |
+          CMD="node scripts/convert-vscode-theme.js --url \"${{ inputs.url }}\""
+          if [ -n "${{ inputs.id }}" ]; then CMD="$CMD --id \"${{ inputs.id }}\""; fi
+          if [ -n "${{ inputs.name }}" ]; then CMD="$CMD --name \"${{ inputs.name }}\""; fi
+          if [ -n "${{ inputs.author }}" ]; then CMD="$CMD --author \"${{ inputs.author }}\""; fi
+          eval $CMD
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+
+          if git diff --staged --quiet; then
+            echo "No theme changes detected."
+          else
+            git commit -m "feat(themes): auto-import theme from ${{ inputs.url }} [skip ci]"
+            git push
+          fi
