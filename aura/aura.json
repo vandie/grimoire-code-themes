@@ -6,7 +6,7 @@
   "mode": "dark",
   "app_mode": "grimoire",
   "author": "DaltonMenezes",
-  "description": "Theme auto-converted from Aura.",
+  "description": "A beautiful dark theme for Visual Studio Code",
   "homepage": "https://vscodethemes.com/e/DaltonMenezes.aura-theme/aura-dark",
   "variants": {
     "dark": {

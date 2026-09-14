@@ -1,7 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/grimoire-codex/community-add-ons/main/schema/theme-index.schema.json",
   "version": 1,
-  "generated": "2026-09-14T23:10:26Z",
+  "generated": "2026-09-14T23:11:55Z",
   "themes": [
     {
       "id": "aura",
@@ -12,10 +12,10 @@
         "dark"
       ],
       "path": "aura/aura.json",
-      "sha256": "082fb1773086d90ade494b96c79c261df9f09abd5e1922a62ae43516e1ba0b94",
+      "sha256": "0566d79419c10ceebf3fa9a3759087db74b1f88ea1803c6208bd33d3749778ec",
       "app_mode": "grimoire",
       "author": "DaltonMenezes",
-      "description": "Theme auto-converted from Aura.",
+      "description": "A beautiful dark theme for Visual Studio Code",
       "homepage": "https://vscodethemes.com/e/DaltonMenezes.aura-theme/aura-dark"
     },
     {
