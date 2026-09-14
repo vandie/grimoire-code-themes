@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-09-14T21:55:23Z",
+  "generated": "2026-09-14T22:00:28Z",
   "themes": [
     {
       "id": "dracula",
@@ -19,14 +19,14 @@
     },
     {
       "id": "panda",
-      "name": "Panda",
+      "name": "Panda Syntax",
       "version": "1.0.0",
       "mode": "dark",
       "modes": [
         "dark"
       ],
       "path": "panda/panda.json",
-      "sha256": "1dff2ff614e520897ee91d2dcc3b499e997d090bd00d25898cf77b0e4f828701",
+      "sha256": "d00ec06cd0284f12608ba6bcef1dbd0284fd677b493ef872a5d184dfcc1f7d48",
       "app_mode": "grimoire",
       "author": "siamak",
       "description": "A super-minimal dark syntax theme designed for code editors featuring vibrant pink, cyan, and orange accents.",
