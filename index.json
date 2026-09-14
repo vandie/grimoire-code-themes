@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-09-14T22:00:37Z",
+  "generated": "2026-09-14T22:02:28Z",
   "themes": [
     {
       "id": "dracula",
@@ -16,6 +16,22 @@
       "author": "zenorocha",
       "description": "A dark theme for code editors and terminal emulators created by Zeno Rocha featuring a distinct purple and pastel accent color palette.",
       "homepage": "https://draculatheme.com"
+    },
+    {
+      "id": "gruvbox",
+      "name": "Gruvbox",
+      "version": "1.0.0",
+      "mode": "dark",
+      "modes": [
+        "light",
+        "dark"
+      ],
+      "path": "gruvbox/gruvbox.json",
+      "sha256": "c2e569d90852b314eab616f86a57b9f3fa9d0d6223bbfc7f791e3fa05203dfde",
+      "app_mode": "grimoire",
+      "author": "morhetz",
+      "description": "Retro groove color scheme for Vim & modern code editors with warm earth tones, offering both dark and light variants.",
+      "homepage": "https://github.com/morhetz/gruvbox"
     },
     {
       "id": "panda",
