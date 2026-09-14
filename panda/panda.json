@@ -4,8 +4,9 @@
   "version": "1.0.0",
   "mode": "dark",
   "app_mode": "grimoire",
-  "author": "vandie",
-  "description": "A dark theme based on the Panda Syntax coding theme.",
+  "author": "siamak",
+  "description": "A super-minimal dark syntax theme designed for code editors featuring vibrant pink, cyan, and orange accents.",
+  "homepage": "https://github.com/siamak/panda-syntax",
   "variants": {
     "dark": {
       "bg-deep": "#242526",
