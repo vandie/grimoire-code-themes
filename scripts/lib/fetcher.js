@@ -74,6 +74,29 @@ export function normalizeGithubUrl(urlStr) {
 }
 
 /**
+ * Searches extracted VSIX package directories for original licence files.
+ */
+function findLicenceFile(extractDir) {
+  const candidateDirs = [path.join(extractDir, 'extension'), extractDir];
+  const candidateNames = ['license', 'license.md', 'license.txt', 'licence', 'licence.md', 'licence.txt'];
+
+  for (const dir of candidateDirs) {
+    if (!fs.existsSync(dir)) continue;
+    const entries = fs.readdirSync(dir);
+    for (const name of candidateNames) {
+      const match = entries.find((e) => e.toLowerCase() === name);
+      if (match) {
+        const fullPath = path.join(dir, match);
+        if (fs.statSync(fullPath).isFile()) {
+          return fs.readFileSync(fullPath, 'utf8');
+        }
+      }
+    }
+  }
+  return null;
+}
+
+/**
  * Resolves Open VSX / vscodethemes.com extension links and unpacks the VSIX archive.
  */
 export async function handleVscodethemesUrl(urlStr, rootDir) {
@@ -128,6 +151,9 @@ export async function handleVscodethemesUrl(urlStr, rootDir) {
   const themeFullPath = path.join(tmpExtractDir, 'extension', themeRelativePath);
   const themeRaw = fs.readFileSync(themeFullPath, 'utf8');
 
+  // Search package for existing licence documentation prior to temporary directory cleanup
+  const licenceContent = findLicenceFile(tmpExtractDir);
+
   // Clean up temporary archive files
   fs.rmSync(tmpVsixPath, { force: true });
   fs.rmSync(tmpExtractDir, { recursive: true, force: true });
@@ -137,6 +163,7 @@ export async function handleVscodethemesUrl(urlStr, rootDir) {
     name: selectedThemeContrib.label || pkgData.displayName || pkgData.name,
     author: publisher,
     homepage: urlStr,
-    version: pkgData.version
+    version: pkgData.version,
+    licenceContent
   };
 }

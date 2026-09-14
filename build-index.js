@@ -82,6 +82,65 @@ function discoverThemes() {
   return { themes, errors };
 }
 
+/**
+ * Formats theme metadata into markdown table rows for README documentation.
+ */
+function generateReadmeTable(themes) {
+  const header = '| Theme | Modes | Author | Description |\n| --- | --- | --- | --- |';
+  const rows = themes.map((t) => {
+    const themeLink = `[${t.name}](${t.id}/)`;
+    const modesStr = Array.isArray(t.modes) ? t.modes.join(' & ') : (t.mode || 'dark');
+    let authorStr = '—';
+    if (t.author) {
+      const cleanAuthor = t.author.startsWith('@') ? t.author.slice(1) : t.author;
+      if (/^[a-zA-Z0-9-]+$/.test(cleanAuthor)) {
+        authorStr = `[@${cleanAuthor}](https://github.com/${cleanAuthor})`;
+      } else {
+        authorStr = t.author;
+      }
+    }
+    const descStr = t.description || '';
+    return `| ${themeLink} | ${modesStr} | ${authorStr} | ${descStr} |`;
+  });
+  return [header, ...rows].join('\n');
+}
+
+/**
+ * Synchronises the available themes table in README.md with registered theme manifests.
+ */
+function updateReadme(themes, rootDir, checkOnly) {
+  const readmePath = path.join(rootDir, 'README.md');
+  if (!fs.existsSync(readmePath)) return false;
+
+  const content = fs.readFileSync(readmePath, 'utf8');
+  const newTable = generateReadmeTable(themes);
+
+  // Match the markdown table block under ## Available Themes heading
+  const tableRegex = /(\|\s*Theme\s*\|\s*Modes\s*\|[\s\S]*?)(?=\n\n## |\n\s*$)/;
+
+  if (!tableRegex.test(content)) {
+    console.warn('Could not locate Available Themes table in README.md to update.');
+    return false;
+  }
+
+  const updatedContent = content.replace(tableRegex, newTable);
+  const isStale = content !== updatedContent;
+
+  if (checkOnly) {
+    if (isStale) {
+      console.error('README.md theme table is stale - run: node build-index.js');
+    }
+    return isStale;
+  }
+
+  if (isStale) {
+    fs.writeFileSync(readmePath, updatedContent);
+    console.log('Updated README.md theme table successfully.');
+  }
+
+  return false;
+}
+
 function main() {
   const args = process.argv.slice(2);
   const checkOnly = args.includes('--check');
@@ -108,7 +167,7 @@ function main() {
 
   if (checkOnly) {
     if (!fs.existsSync(indexPath)) {
-      console.error('index.json is missing — run: node build-index.js');
+      console.error('index.json is missing - run: node build-index.js');
       process.exit(1);
     }
 
@@ -116,23 +175,25 @@ function main() {
     try {
       committed = JSON.parse(fs.readFileSync(indexPath, 'utf8'));
     } catch (err) {
-      console.error('index.json is invalid JSON — run: node build-index.js');
+      console.error('index.json is invalid JSON - run: node build-index.js');
       process.exit(1);
     }
 
-    const isStale = JSON.stringify(committed.themes) !== JSON.stringify(builtIndex.themes);
+    const isIndexStale = JSON.stringify(committed.themes) !== JSON.stringify(builtIndex.themes);
+    const isReadmeStale = updateReadme(themes, ROOT, true);
 
-    if (isStale) {
-      console.error('index.json is stale — run: node build-index.js');
+    if (isIndexStale || isReadmeStale) {
+      if (isIndexStale) console.error('index.json is stale - run: node build-index.js');
       process.exit(1);
     }
 
-    console.log('index.json is up to date.');
+    console.log('index.json and README.md are up to date.');
     process.exit(0);
   }
 
   fs.writeFileSync(indexPath, JSON.stringify(builtIndex, null, 2) + '\n');
   console.log(`Validated ${themes.length} theme(s) and wrote index.json successfully.`);
+  updateReadme(themes, ROOT, false);
 }
 
 main();
