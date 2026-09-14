@@ -1,4 +1,5 @@
 {
+  "$schema": "https://raw.githubusercontent.com/grimoire-codex/community-add-ons/main/schema/theme.schema.json",
   "id": "panda",
   "name": "Panda Syntax",
   "version": "1.0.0",

@@ -20,7 +20,7 @@ function discoverThemes() {
   const errors = [];
 
   for (const entry of entries) {
-    if (!entry.isDirectory() || entry.name.startsWith('.') || entry.name === 'node_modules') continue;
+    if (!entry.isDirectory() || entry.name.startsWith('.') || entry.name === 'node_modules' || entry.name === 'schema') continue;
 
     const themeDir = entry.name;
     const manifestPath = path.join(ROOT, themeDir, `${themeDir}.json`);
@@ -95,6 +95,7 @@ function main() {
 
   const generated = new Date().toISOString().replace(/\.\d{3}Z$/, 'Z');
   const builtIndex = {
+    $schema: "https://raw.githubusercontent.com/grimoire-codex/community-add-ons/main/schema/theme-index.schema.json",
     version: 1,
     generated,
     themes

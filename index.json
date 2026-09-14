@@ -1,6 +1,7 @@
 {
+  "$schema": "https://raw.githubusercontent.com/grimoire-codex/community-add-ons/main/schema/theme-index.schema.json",
   "version": 1,
-  "generated": "2026-09-14T22:02:38Z",
+  "generated": "2026-09-14T22:14:00Z",
   "themes": [
     {
       "id": "dracula",
@@ -11,7 +12,7 @@
         "dark"
       ],
       "path": "dracula/dracula.json",
-      "sha256": "eb2011f4cadd1736c66e1314bd1f1f711adb182d43bf7b2cbcac33527d610a9b",
+      "sha256": "5e748527d8653f2ba1c6317116fed28ab99e65430deca84cb80937ecef7b4b58",
       "app_mode": "grimoire",
       "author": "zenorocha",
       "description": "A dark theme for code editors and terminal emulators created by Zeno Rocha featuring a distinct purple and pastel accent color palette.",
@@ -27,7 +28,7 @@
         "dark"
       ],
       "path": "gruvbox/gruvbox.json",
-      "sha256": "c2e569d90852b314eab616f86a57b9f3fa9d0d6223bbfc7f791e3fa05203dfde",
+      "sha256": "0ca18bc52a2cfcbd9b7b63c430c645437edaffd4d269dea4354e12eaaeee8747",
       "app_mode": "grimoire",
       "author": "morhetz",
       "description": "Retro groove color scheme for Vim & modern code editors with warm earth tones, offering both dark and light variants.",
@@ -42,7 +43,7 @@
         "dark"
       ],
       "path": "panda/panda.json",
-      "sha256": "d00ec06cd0284f12608ba6bcef1dbd0284fd677b493ef872a5d184dfcc1f7d48",
+      "sha256": "6923fbf1114e2cf4543e0b4eec66a53555eecae48f61ad0888b20a1b922b190a",
       "app_mode": "grimoire",
       "author": "siamak",
       "description": "A super-minimal dark syntax theme designed for code editors featuring vibrant pink, cyan, and orange accents.",
@@ -58,7 +59,7 @@
         "dark"
       ],
       "path": "solarized/solarized.json",
-      "sha256": "f2976030bd982234de3515b5337996f3a662c7c811b4f5d8946e8570ab63dbe3",
+      "sha256": "cf70c093dd2cf0db3b779b9faf956b0c3c59d73d491b997a729c257e62d63d72",
       "app_mode": "grimoire",
       "author": "altercation",
       "description": "Precision 16-color palette designed for use with terminal and GUI applications, offering both dark and light modes.",
@@ -73,7 +74,7 @@
         "dark"
       ],
       "path": "tokyo-night/tokyo-night.json",
-      "sha256": "811af8e5d1d9bc0368b33b0d54fe8fba3621f6d3674dcdea1a98a64479534445",
+      "sha256": "bea935eeb5dd0c19ae98a62aecaf353d7473a0db7db5a9d20694f951fb875027",
       "app_mode": "grimoire",
       "author": "folke",
       "description": "A clean, dark Neovim & VS Code theme inspired by the lights of Tokyo at night.",
