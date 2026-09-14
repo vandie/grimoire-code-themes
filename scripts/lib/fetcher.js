@@ -162,6 +162,7 @@ export async function handleVscodethemesUrl(urlStr, rootDir) {
     rawContent: themeRaw,
     name: selectedThemeContrib.label || pkgData.displayName || pkgData.name,
     author: publisher,
+    description: pkgData.description || apiData.description,
     homepage: urlStr,
     version: pkgData.version,
     licenceContent

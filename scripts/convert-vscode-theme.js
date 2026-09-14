@@ -47,6 +47,7 @@ async function main() {
       if (!options.name && extractedMeta.name) options.name = extractedMeta.name;
       if (!options.author && extractedMeta.author) options.author = extractedMeta.author;
       if (!options.version && extractedMeta.version) options.version = extractedMeta.version;
+      if (!options.description && extractedMeta.description) options.description = extractedMeta.description;
       if (!options.homepage && extractedMeta.homepage) options.homepage = extractedMeta.homepage;
     } else {
       const targetUrl = normalizeGithubUrl(url);

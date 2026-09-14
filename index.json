@@ -1,7 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/grimoire-codex/community-add-ons/main/schema/theme-index.schema.json",
   "version": 1,
-  "generated": "2026-09-14T23:07:25Z",
+  "generated": "2026-09-14T23:10:12Z",
   "themes": [
     {
       "id": "aura",
@@ -42,10 +42,10 @@
         "dark"
       ],
       "path": "dracula-at-night/dracula-at-night.json",
-      "sha256": "39d98f9f5ba05af7b704d1c56f9458acb4a5fece0ea8e60ec0b3f09adb361170",
+      "sha256": "1842bd9bf438ca4b86961fb8646be181cd9978e70d8341dce1e025be6bb89fb2",
       "app_mode": "grimoire",
       "author": "bceskavich",
-      "description": "Theme auto-converted from Dracula At Night.",
+      "description": "Dracula At Night — A Dracula fork, with a darker flavor",
       "homepage": "https://vscodethemes.com/e/bceskavich.theme-dracula-at-night/dracula-at-night"
     },
     {
