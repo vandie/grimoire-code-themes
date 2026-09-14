@@ -6,6 +6,9 @@ A user installs the ones they want from **Settings → Appearance** and picks on
 
 ## Available Themes
 
+> [!NOTE]
+> The **Author** column and manifest field reference the GitHub username of the original syntax theme's creator.
+
 | Theme | Modes | Author | Description |
 | --- | --- | --- | --- |
 | [Dracula](dracula/) | dark | [@zenorocha](https://github.com/zenorocha) | Distinct purple & pastel accent color palette. |
