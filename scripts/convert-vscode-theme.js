@@ -62,7 +62,8 @@ async function main() {
   const themeData = parseJsonc(rawContent);
   const { themeId, manifest } = mapVsCodeToGrimoire(themeData, options, sourceUrl);
 
-  const targetDir = path.join(ROOT, themeId);
+  const THEMES_DIR = path.join(ROOT, 'themes');
+  const targetDir = path.join(THEMES_DIR, themeId);
   fs.mkdirSync(targetDir, { recursive: true });
 
   const manifestPath = path.join(targetDir, `${themeId}.json`);

@@ -8,25 +8,31 @@ import { fileURLToPath } from 'node:url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const ROOT = __dirname;
+const THEMES_DIR = path.join(ROOT, 'themes');
 
 function calculateSha256(filePath) {
   const content = fs.readFileSync(filePath);
   return crypto.createHash('sha256').update(content).digest('hex');
 }
 
+/**
+ * Scans the themes directory to discover valid theme manifests and calculate content hashes.
+ */
 function discoverThemes() {
-  const entries = fs.readdirSync(ROOT, { withFileTypes: true });
+  if (!fs.existsSync(THEMES_DIR)) {
+    return { themes: [], errors: [] };
+  }
+
+  const entries = fs.readdirSync(THEMES_DIR, { withFileTypes: true });
   const themes = [];
   const errors = [];
 
-  const IGNORED_DIRS = new Set(['node_modules', 'schema', 'scripts']);
-
   for (const entry of entries) {
-    // Skip hidden directories, non-directories, and tooling folders to prevent script/schema files from being indexed as themes
-    if (!entry.isDirectory() || entry.name.startsWith('.') || IGNORED_DIRS.has(entry.name)) continue;
+    // Skip non-directories and hidden folders inside the themes directory
+    if (!entry.isDirectory() || entry.name.startsWith('.')) continue;
 
     const themeDir = entry.name;
-    const manifestPath = path.join(ROOT, themeDir, `${themeDir}.json`);
+    const manifestPath = path.join(THEMES_DIR, themeDir, `${themeDir}.json`);
 
     if (!fs.existsSync(manifestPath)) {
       continue;
@@ -88,7 +94,7 @@ function discoverThemes() {
 function generateReadmeTable(themes) {
   const header = '| Theme | Modes | Author | Description |\n| --- | --- | --- | --- |';
   const rows = themes.map((t) => {
-    const themeLink = `[${t.name}](${t.id}/)`;
+    const themeLink = `[${t.name}](themes/${t.id}/)`;
     const modesStr = Array.isArray(t.modes) ? t.modes.join(' & ') : (t.mode || 'dark');
     let authorStr = '—';
     if (t.author) {
@@ -163,11 +169,11 @@ function main() {
     themes
   };
 
-  const indexPath = path.join(ROOT, 'index.json');
+  const indexPath = path.join(THEMES_DIR, 'index.json');
 
   if (checkOnly) {
     if (!fs.existsSync(indexPath)) {
-      console.error('index.json is missing - run: node build-index.js');
+      console.error('themes/index.json is missing - run: node build-index.js');
       process.exit(1);
     }
 
@@ -175,7 +181,7 @@ function main() {
     try {
       committed = JSON.parse(fs.readFileSync(indexPath, 'utf8'));
     } catch (err) {
-      console.error('index.json is invalid JSON - run: node build-index.js');
+      console.error('themes/index.json is invalid JSON - run: node build-index.js');
       process.exit(1);
     }
 
@@ -183,16 +189,17 @@ function main() {
     const isReadmeStale = updateReadme(themes, ROOT, true);
 
     if (isIndexStale || isReadmeStale) {
-      if (isIndexStale) console.error('index.json is stale - run: node build-index.js');
+      if (isIndexStale) console.error('themes/index.json is stale - run: node build-index.js');
       process.exit(1);
     }
 
-    console.log('index.json and README.md are up to date.');
+    console.log('themes/index.json and README.md are up to date.');
     process.exit(0);
   }
 
+  fs.mkdirSync(THEMES_DIR, { recursive: true });
   fs.writeFileSync(indexPath, JSON.stringify(builtIndex, null, 2) + '\n');
-  console.log(`Validated ${themes.length} theme(s) and wrote index.json successfully.`);
+  console.log(`Validated ${themes.length} theme(s) and wrote themes/index.json successfully.`);
   updateReadme(themes, ROOT, false);
 }
 
