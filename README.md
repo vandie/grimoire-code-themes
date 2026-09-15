@@ -1,8 +1,27 @@
 # Grimoire Code Themes
 
-A collection of color themes for [Grimoire](https://github.com/grimoire-codex) inspired by famous open-source coding themes and editor palettes (such as Dracula, Gruvbox, Panda Syntax, Solarized, and Tokyo Night).
+A collection of colour themes for [Grimoire](https://github.com/grimoire-codex/grimoire) inspired by famous open-source coding themes and editor palettes (such as Dracula, Gruvbox, Panda Syntax, Solarized, and Tokyo Night).
 
-A user installs the ones they want from **Settings → Appearance** and picks one for their account.
+## Installation & Usage
+
+In Grimoire 1.7+, themes can be catalogued from custom add-on sources or imported directly as JSON.
+
+### Adding as an Add-on Source (Recommended for Grimoire 1.7+)
+
+1. In Grimoire, navigate to **Settings → Add-ons** (Admin access required).
+2. Expand the **Add-on Sources** section.
+3. Paste the raw index URL for this repository into the **Add Source** field:
+   ```text
+   https://raw.githubusercontent.com/vandie/grimoire-code-themes/main/themes/index.json
+   ```
+4. Click **Add Source**. Grimoire verifies the catalogue index and labels available content with a **themes** badge.
+5. Account holders can now go to **Settings → Appearance**, click **Browse community themes**, and install any theme from this collection.
+
+### Direct JSON Import (Manual)
+
+1. Open any theme manifest under [`themes/`](themes/) (for example, [`themes/aura/aura.json`](themes/aura/aura.json)) and copy its full JSON payload.
+2. In Grimoire, navigate to **Settings → Appearance**.
+3. Click **Import a theme**, paste the JSON payload, and click **Install**.
 
 ## Available Themes
 
@@ -21,4 +40,4 @@ A user installs the ones they want from **Settings → Appearance** and picks on
 
 ## Building & Contributing
 
-Run `npm run build` (or `node build-index.js`) to validate theme manifests and update `index.json`. Run `npm run check` to verify index currency.
+Run `npm run build` (or `node build-index.js`) to validate theme manifests and update `themes/index.json`. Run `npm run check` to verify index currency.
